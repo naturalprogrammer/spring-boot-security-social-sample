@@ -1,0 +1,9 @@
+form .error {
+	color: #A94442;
+}
+
+span[id$=errors] {
+	color: #A94442;
+	font-weight: bold;
+}
+
