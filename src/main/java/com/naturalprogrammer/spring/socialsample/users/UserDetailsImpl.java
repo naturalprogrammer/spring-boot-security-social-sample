@@ -6,8 +6,9 @@ import java.util.HashSet;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.social.security.SocialUserDetails;
 
-public class UserDetailsImpl implements UserDetails {
+public class UserDetailsImpl implements SocialUserDetails {
 	
 	private static final long serialVersionUID = 5197941260523577515L;
 	
@@ -63,6 +64,11 @@ public class UserDetailsImpl implements UserDetails {
 	@Override
 	public boolean isEnabled() {
 		return true;
+	}
+
+	@Override
+	public String getUserId() {
+		return getUsername();
 	}
 
 }

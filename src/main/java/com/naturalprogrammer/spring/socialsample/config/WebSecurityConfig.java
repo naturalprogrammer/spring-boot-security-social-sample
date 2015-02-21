@@ -17,6 +17,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.RememberMeServices;
 import org.springframework.security.web.authentication.rememberme.TokenBasedRememberMeServices;
+import org.springframework.social.security.SpringSocialConfigurer;
 
 @Configuration
 @EnableWebMvcSecurity
@@ -73,7 +74,8 @@ public class WebSecurityConfig  extends WebSecurityConfigurerAdapter {
             .rememberMe().key(rememberMeKey).rememberMeServices(rememberMeServices()).and()
             .logout()
                 .deleteCookies("JSESSIONID")
-                .permitAll();
+                .permitAll()
+            .and().apply(new SpringSocialConfigurer());
         
 	    if (!env.equals("dev"))
 	    	http.requiresChannel().anyRequest().requiresSecure();

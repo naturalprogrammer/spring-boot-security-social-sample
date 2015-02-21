@@ -3,10 +3,13 @@ package com.naturalprogrammer.spring.socialsample.users;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.social.security.SocialUserDetails;
+import org.springframework.social.security.SocialUserDetailsService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,7 +18,7 @@ import com.naturalprogrammer.spring.socialsample.util.MyUtil;
 
 @Service
 @Transactional(propagation=Propagation.SUPPORTS, readOnly=true)
-public class UserServiceImpl implements UserService, UserDetailsService {
+public class UserServiceImpl implements UserService, UserDetailsService, SocialUserDetailsService {
 	
     private final Log log = LogFactory.getLog(UserServiceImpl.class);
 	
@@ -32,7 +35,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	}
 
 	@Override
-	public UserDetails loadUserByUsername(String username)
+	public SocialUserDetails loadUserByUsername(String username)
 			throws UsernameNotFoundException {
 		User user = userRepository.findByEmail(username);
 		if (user == null)
@@ -69,6 +72,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 		user.setName(userEditForm.getName());
 		userRepository.save(user);
 		
+	}
+
+	@Override
+	public SocialUserDetails loadUserByUserId(String userId)
+			throws UsernameNotFoundException, DataAccessException {
+		return loadUserByUsername(userId);
 	}
 
 }
