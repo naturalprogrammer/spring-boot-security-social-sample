@@ -36,6 +36,7 @@
 			
 			<button type="submit" class="btn btn-primary">Sign In</button>
 			<a class="btn btn-default" href="/forgot-password">Forgot Password</a>
+			<a class="btn btn-default" href="/auth/facebook?scope=${facebookScope}">Facebook Sign In</a>
 		</form:form>
 	</div>
 </div>

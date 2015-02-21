@@ -4,6 +4,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
+import org.springframework.social.connect.Connection;
+import org.springframework.social.connect.UserProfile;
 
 public class SignupForm {
 	
@@ -43,6 +45,19 @@ public class SignupForm {
 	public String toString() {
 		return "SignupForm [email=" + email + ", name=" + name + ", password="
 				+ password + "]";
+	}
+	
+	public static SignupForm fromConnection(Connection<?> connection) {
+		
+        SignupForm form = new SignupForm();
+        
+        if (connection != null) {
+            UserProfile socialMediaProfile = connection.fetchUserProfile();
+            form.setEmail(socialMediaProfile.getEmail());
+            form.setName(socialMediaProfile.getFirstName() + " " + socialMediaProfile.getLastName());
+        }
+ 
+        return form;
 	}
 	
 }

@@ -63,6 +63,11 @@
 	      <sec:authorize access="isAnonymous()">
 	      
 	        <li><a href="<c:url value='/signup' />"><span class="glyphicon glyphicon-list-alt"></span> Sign up</a></li>
+			<li>
+			   	<a href="/auth/facebook?scope=${facebookScope}">
+			    	<span class="glyphicon glyphicon-globe"></span> Facebook Sign Up
+			    </a>
+			</li>
 	        <li>
                   <a href="/signin">Sign in <span class="glyphicon glyphicon-log-in"></span></a>
             </li>
