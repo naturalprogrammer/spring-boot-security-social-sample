@@ -62,8 +62,6 @@ public class WebSecurityConfig  extends WebSecurityConfigurerAdapter {
                 		"/signup",
                 		"/public/**",
                 		"/users/*",
-                		"/connect/**",
-                		"/social/**",
                 		"/auth/**").permitAll()
                 .anyRequest().authenticated();
         

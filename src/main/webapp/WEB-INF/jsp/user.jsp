@@ -20,6 +20,7 @@
         <a class="btn btn-link" href="/users/${user.id}/edit">Edit</a>
         <a class="btn btn-link" href="/users/${user.id}/change-password">Change password</a>
         <a class="btn btn-link" href="/users/${user.id}/change-email">Change email id</a>
+        <a class="btn btn-link" href="/users/current/facebook-data">Facebook data</a>
 
     </div>
 
