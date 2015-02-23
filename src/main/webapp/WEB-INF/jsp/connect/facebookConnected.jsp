@@ -4,7 +4,7 @@
 
 	<div class="alert alert-info">
 		You are now connected to your Facebook account.
-		Click <a href='/users/current/facebook-data'>here</a> to continue.
+		Click <a href='${empty redirectAfterConnecting ? "/" : redirectAfterConnecting}'>here</a> to continue.
 	</div>
 
 <%@include file="../includes/footer.jsp"%>

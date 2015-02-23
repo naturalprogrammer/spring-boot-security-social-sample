@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.social.facebook.api.Facebook;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -12,13 +13,24 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.naturalprogrammer.spring.socialsample.util.MyControllerAdvice;
 import com.naturalprogrammer.spring.socialsample.util.MyUtil;
 
 @Controller
 @RequestMapping("/users")
+@SessionAttributes("redirectAfterConnecting")
 public class ProfileController {
+	
+	private Facebook facebook;
+
+	@Autowired
+	public void setFacebook(Facebook facebook) {
+		this.facebook = facebook;
+	}
 	
 	private UserService userService;
 	
@@ -28,8 +40,11 @@ public class ProfileController {
 	}	
 	
     @RequestMapping(value = "/{userId}")
-    public String getById(@PathVariable("userId") long userId, Model model) {
+    public String getById(@PathVariable("userId") long userId, Model model, SessionStatus status) {
     	
+    	status.setComplete();
+    	
+    	model.addAttribute("facebookAuthorized", facebook.isAuthorized());    	
     	model.addAttribute(userService.findOne(userId));
     	
 	  	return "user";
@@ -62,5 +77,15 @@ public class ProfileController {
 
 		return "redirect:/";
 	}
+	
+    @RequestMapping(value = "/{userId}/connect/facebook", method = RequestMethod.POST)
+    public String connectFacebook(@PathVariable("userId") long userId, Model model) {
+    	
+    	model.addAttribute("redirectAfterConnecting", "/users/" + userId);
+    	
+		return "forward:/connect/facebook?scope=" + MyControllerAdvice.FACEBOOK_SCOPE;
+
+    }
+
 	
 }
