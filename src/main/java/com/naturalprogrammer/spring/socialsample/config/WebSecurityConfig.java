@@ -20,7 +20,6 @@ import org.springframework.security.web.authentication.rememberme.TokenBasedReme
 import org.springframework.social.security.SpringSocialConfigurer;
 
 @Configuration
-@EnableWebMvcSecurity
 public class WebSecurityConfig  extends WebSecurityConfigurerAdapter {
 	
     private final Log log = LogFactory.getLog(WebSecurityConfig.class);
@@ -67,7 +66,7 @@ public class WebSecurityConfig  extends WebSecurityConfigurerAdapter {
         
         http
             .formLogin()
-                .loginPage("/signin")
+                //.loginPage("/signin")
                 .permitAll().and()
             .rememberMe().key(rememberMeKey).rememberMeServices(rememberMeServices()).and()
             .logout()
