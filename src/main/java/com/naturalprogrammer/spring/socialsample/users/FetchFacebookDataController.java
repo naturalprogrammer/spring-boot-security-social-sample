@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
+import com.naturalprogrammer.spring.socialsample.util.MyUtil;
+
 @Controller
 @RequestMapping("/users/current/facebook-data")
 @SessionAttributes("redirectAfterConnecting")
@@ -27,7 +29,7 @@ public class FetchFacebookDataController {
     @RequestMapping(method=RequestMethod.GET)
     public String helloFacebook(Model model, SessionStatus status) {
     	
-        if (!facebook.isAuthorized()) {
+        if (!MyUtil.isAuthorized(facebook)) {
         	model.addAttribute("redirectAfterConnecting", "/users/current/facebook-data");
             return "forward:/connect/facebook";
         }
