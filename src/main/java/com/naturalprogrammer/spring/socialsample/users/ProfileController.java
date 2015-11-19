@@ -44,7 +44,7 @@ public class ProfileController {
     	
     	status.setComplete();
     	
-    	model.addAttribute("facebookAuthorized", facebook.isAuthorized());    	
+    	model.addAttribute("facebookAuthorized", MyUtil.isAuthorized(facebook));    	
     	model.addAttribute(userService.findOne(userId));
     	
 	  	return "user";

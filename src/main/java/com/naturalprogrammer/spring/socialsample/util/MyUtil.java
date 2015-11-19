@@ -8,6 +8,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.social.facebook.api.Facebook;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -45,6 +46,14 @@ public class MyUtil {
  
         Authentication authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(authentication);
+    }
+    
+    public static boolean isAuthorized(Facebook facebook) {
+    	try {
+    		return facebook.isAuthorized();
+    	} catch (Throwable t){
+    		return false;
+    	}
     }
 
 
