@@ -19,7 +19,6 @@ import org.springframework.security.web.authentication.RememberMeServices;
 import org.springframework.security.web.authentication.rememberme.TokenBasedRememberMeServices;
 
 @Configuration
-@EnableWebMvcSecurity
 public class WebSecurityConfig  extends WebSecurityConfigurerAdapter {
 	
     private final Log log = LogFactory.getLog(WebSecurityConfig.class);
