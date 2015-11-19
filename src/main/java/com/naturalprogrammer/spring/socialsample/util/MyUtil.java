@@ -47,7 +47,7 @@ public class MyUtil {
         Authentication authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(authentication);
     }
-
+    
     public static boolean isAuthorized(Facebook facebook) {
     	try {
     		return facebook.isAuthorized();
