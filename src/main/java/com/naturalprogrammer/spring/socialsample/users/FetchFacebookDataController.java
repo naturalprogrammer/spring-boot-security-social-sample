@@ -10,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.naturalprogrammer.spring.socialsample.util.MyUtil;
+
 @Controller
 @RequestMapping("/users/current/facebook-data")
 public class FetchFacebookDataController {
@@ -24,7 +26,7 @@ public class FetchFacebookDataController {
     @RequestMapping(method=RequestMethod.GET)
     public String helloFacebook(Model model) {
     	
-        if (!facebook.isAuthorized()) {
+        if (!MyUtil.isAuthorized(facebook)) {
             return "redirect:/connect/facebook";
         }
 
